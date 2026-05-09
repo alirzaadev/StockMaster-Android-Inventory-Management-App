@@ -15,7 +15,7 @@
         android:textColor="@color/on_surface"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:fontFamily="@font/manrope_bold" />
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
         android:text="@string/record_sale_subtitle"
         android:textColor="@color/outline"
         android:textSize="13sp"
-        android:fontFamily="@font/inter" />
+        />
 
     <!-- Product Selector -->
     <com.google.android.material.textfield.TextInputLayout
@@ -48,7 +48,7 @@
             android:id="@+id/act_product_select"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter"
+            
             android:inputType="none"
             android:textColor="@color/on_surface"
             android:textSize="14sp" />
@@ -75,7 +75,7 @@
             android:id="@+id/et_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter"
+            
             android:inputType="number"
             android:textColor="@color/on_surface"
             android:textSize="14sp" />
@@ -95,7 +95,7 @@
             android:text="Unit Profit: Rs. 0"
             android:textColor="@color/on_surface"
             android:textSize="13sp"
-            android:fontFamily="@font/inter" />
+            />
 
         <TextView
             android:id="@+id/tv_total_revenue_preview"
@@ -105,7 +105,7 @@
             android:text="Total Revenue: Rs. 0"
             android:textColor="@color/on_surface"
             android:textSize="13sp"
-            android:fontFamily="@font/inter" />
+            />
 
         <TextView
             android:id="@+id/tv_total_profit_preview"
@@ -116,7 +116,7 @@
             android:textColor="@color/on_surface"
             android:textSize="13sp"
             android:textStyle="bold"
-            android:fontFamily="@font/inter_medium" />
+            />
 
         <TextView
             android:id="@+id/tv_margin_label"
@@ -128,7 +128,7 @@
             android:textColor="@color/secondary"
             android:textSize="11sp"
             android:textStyle="bold"
-            android:fontFamily="@font/inter_medium" />
+            />
     </LinearLayout>
 
     <!-- Confirm Button -->
@@ -143,7 +143,7 @@
         android:textColor="@color/on_primary"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:fontFamily="@font/inter_medium"
+        
         app:backgroundTint="@null"
         app:cornerRadius="100dp" />
 

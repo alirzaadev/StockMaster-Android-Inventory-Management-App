@@ -52,7 +52,7 @@
                 android:textColor="@color/on_primary"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/manrope_bold" />
+                />
 
             <TextView
                 android:id="@+id/tv_detail_category"
@@ -63,7 +63,7 @@
                 android:text="Category"
                 android:textColor="@color/on_secondary_fixed"
                 android:textSize="12sp"
-                android:fontFamily="@font/inter_medium" />
+                />
         </LinearLayout>
     </FrameLayout>
 
@@ -100,7 +100,7 @@
                         android:text="Purchase Price"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="14sp"
-                        android:fontFamily="@font/inter" />
+                        />
                     <TextView
                         android:id="@+id/tv_purchase_price"
                         android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
                         android:textColor="@color/on_surface"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:fontFamily="@font/manrope_bold" />
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -125,7 +125,7 @@
                         android:text="Selling Price"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="14sp"
-                        android:fontFamily="@font/inter" />
+                        />
                     <TextView
                         android:id="@+id/tv_selling_price"
                         android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
                         android:textColor="@color/on_surface"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:fontFamily="@font/manrope_bold" />
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -150,7 +150,7 @@
                         android:text="Profit Margin"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="14sp"
-                        android:fontFamily="@font/inter" />
+                        />
                     <TextView
                         android:id="@+id/tv_margin_badge"
                         android:layout_width="wrap_content"
@@ -159,7 +159,7 @@
                         android:text="Good 36%"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        android:fontFamily="@font/inter_medium" />
+                        />
                 </LinearLayout>
             </LinearLayout>
 
@@ -181,7 +181,7 @@
                     android:textColor="@color/on_surface"
                     android:textSize="32sp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/manrope_bold" />
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -189,7 +189,7 @@
                     android:text="Current Stock"
                     android:textColor="@color/on_surface_variant"
                     android:textSize="14sp"
-                    android:fontFamily="@font/inter" />
+                    />
 
                 <TextView
                     android:id="@+id/tv_stock_status"
@@ -201,7 +201,7 @@
                     android:textColor="@color/on_secondary_fixed"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/inter_medium" />
+                    />
 
                 <TextView
                     android:id="@+id/tv_threshold"
@@ -211,7 +211,7 @@
                     android:text="Low Stock Threshold: 10 units"
                     android:textColor="@color/outline"
                     android:textSize="13sp"
-                    android:fontFamily="@font/inter" />
+                    />
             </LinearLayout>
 
             <!-- Description Card -->
@@ -230,7 +230,7 @@
                     android:textColor="@color/on_surface"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/manrope_bold" />
+                    />
 
                 <TextView
                     android:id="@+id/tv_description"
@@ -240,7 +240,7 @@
                     android:text="No description available."
                     android:textColor="@color/on_surface"
                     android:textSize="14sp"
-                    android:fontFamily="@font/inter" />
+                    />
             </LinearLayout>
 
             <!-- Delete Button (Admin only) -->
@@ -255,7 +255,7 @@
                 android:textColor="@color/on_error_container"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/inter_medium"
+                
                 android:visibility="gone"
                 app:backgroundTint="@color/error_container"
                 app:cornerRadius="100dp" />

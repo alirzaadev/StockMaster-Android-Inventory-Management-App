@@ -36,7 +36,7 @@
             android:textColor="@color/on_surface"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:fontFamily="@font/manrope_bold" />
+            />
     </LinearLayout>
 
     <!-- Clear all button (admin only) -->
@@ -50,7 +50,7 @@
         android:textAllCaps="false"
         android:textColor="@color/error"
         android:textSize="13sp"
-        android:fontFamily="@font/inter_medium"
+        
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/layout_alerts_top"
@@ -94,7 +94,7 @@
             android:text="@string/no_alerts"
             android:textColor="@color/on_surface"
             android:textSize="18sp"
-            android:fontFamily="@font/manrope_bold" />
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
             android:text="All stock levels are healthy"
             android:textColor="@color/outline"
             android:textSize="13sp"
-            android:fontFamily="@font/inter" />
+            />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

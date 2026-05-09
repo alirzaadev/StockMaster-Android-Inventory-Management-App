@@ -20,7 +20,7 @@
             android:textColor="@color/on_surface"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:fontFamily="@font/manrope_bold" />
+            />
 
         <!-- Date Range Row -->
         <LinearLayout
@@ -40,7 +40,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/primary"
                 android:textSize="12sp"
-                android:fontFamily="@font/inter"
+                
                 app:backgroundTint="@color/surface_container_low"
                 app:cornerRadius="100dp" />
 
@@ -55,7 +55,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/primary"
                 android:textSize="12sp"
-                android:fontFamily="@font/inter"
+                
                 app:backgroundTint="@color/surface_container_low"
                 app:cornerRadius="100dp" />
         </LinearLayout>
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="Sales Summary"
-                android:fontFamily="@font/inter"
+                
                 app:chipBackgroundColor="@color/chip_bg_color"
                 app:chipCornerRadius="100dp" />
 
@@ -86,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profit Report"
-                android:fontFamily="@font/inter"
+                
                 app:chipBackgroundColor="@color/chip_bg_color"
                 app:chipCornerRadius="100dp" />
 
@@ -96,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Stock Report"
-                android:fontFamily="@font/inter"
+                
                 app:chipBackgroundColor="@color/chip_bg_color"
                 app:chipCornerRadius="100dp" />
         </com.google.android.material.chip.ChipGroup>
@@ -113,7 +113,7 @@
             android:textColor="@color/on_primary"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:fontFamily="@font/inter_medium"
+            
             app:backgroundTint="@null"
             app:cornerRadius="100dp" />
 
@@ -150,7 +150,7 @@
             android:textColor="@color/on_secondary_container"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:fontFamily="@font/inter_medium"
+            
             android:visibility="gone"
             app:backgroundTint="@color/secondary_container"
             app:cornerRadius="100dp" />

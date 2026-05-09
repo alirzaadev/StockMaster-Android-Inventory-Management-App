@@ -35,7 +35,7 @@
             android:textColor="@color/on_surface"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:fontFamily="@font/manrope_bold" />
+            />
 
         <ImageButton
             android:id="@+id/btn_notifications"

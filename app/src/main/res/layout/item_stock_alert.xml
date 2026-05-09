@@ -38,7 +38,6 @@
             android:textColor="@color/on_surface"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:fontFamily="@font/inter_medium"
             app:layout_constraintEnd_toStartOf="@+id/tv_alert_stock_level"
             app:layout_constraintStart_toEndOf="@+id/iv_alert_icon"
             app:layout_constraintTop_toTopOf="@+id/iv_alert_icon" />
@@ -52,7 +51,6 @@
             android:text="Stock: 0 / Threshold: 0"
             android:textColor="@color/outline"
             android:textSize="11sp"
-            android:fontFamily="@font/inter"
             app:layout_constraintEnd_toStartOf="@+id/tv_alert_stock_level"
             app:layout_constraintStart_toEndOf="@+id/iv_alert_icon"
             app:layout_constraintTop_toBottomOf="@+id/tv_alert_title" />
@@ -66,7 +64,6 @@
             android:text="01 Jan 2024"
             android:textColor="@color/outline"
             android:textSize="10sp"
-            android:fontFamily="@font/inter"
             app:layout_constraintEnd_toStartOf="@+id/tv_alert_stock_level"
             app:layout_constraintStart_toEndOf="@+id/iv_alert_icon"
             app:layout_constraintTop_toBottomOf="@+id/tv_alert_subtitle" />
@@ -80,7 +77,6 @@
             android:textColor="@color/on_tertiary_fixed"
             android:textSize="11sp"
             android:textStyle="bold"
-            android:fontFamily="@font/inter_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
