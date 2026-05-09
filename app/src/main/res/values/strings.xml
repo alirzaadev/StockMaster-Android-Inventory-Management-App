@@ -8,6 +8,8 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="sign_in">Sign In</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with">or continue with</string>
     <string name="register">Register</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="go_to_register">Create account</string>
@@ -19,6 +21,7 @@
     <string name="empty_confirm_password">Confirm your password</string>
     <string name="password_mismatch">Passwords do not match</string>
     <string name="auth_failed">Authentication failed</string>
+    <string name="google_sign_in_failed">Google sign-in failed</string>
     <string name="auth_success">Success</string>
     <string name="login_success">Logged in successfully</string>
     <string name="register_success">Account created successfully</string>
