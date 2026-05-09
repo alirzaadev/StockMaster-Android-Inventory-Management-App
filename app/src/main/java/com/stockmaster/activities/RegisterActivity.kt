@@ -3,58 +3,62 @@ package com.stockmaster.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.core.widget.doAfterTextChanged
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.auth.FirebaseAuth
 import com.stockmaster.R
 
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     private lateinit var tilEmail: TextInputLayout
     private lateinit var tilPassword: TextInputLayout
+    private lateinit var tilConfirmPassword: TextInputLayout
     private lateinit var etEmail: TextInputEditText
     private lateinit var etPassword: TextInputEditText
-    private lateinit var btnSignIn: MaterialButton
-    private lateinit var tvGoRegister: View
+    private lateinit var etConfirmPassword: TextInputEditText
+    private lateinit var btnRegister: MaterialButton
+    private lateinit var tvGoLogin: View
     private lateinit var rootView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-
+        setContentView(R.layout.activity_register)
 
         if (FirebaseAuthManager.currentUserEmail() != null) {
             openMainActivity(FirebaseAuthManager.currentUserEmail())
             return
         }
 
-        rootView = findViewById(R.id.root_login)
+        rootView = findViewById(R.id.root_register)
         tilEmail = findViewById(R.id.til_email)
         tilPassword = findViewById(R.id.til_password)
+        tilConfirmPassword = findViewById(R.id.til_confirm_password)
         etEmail = findViewById(R.id.et_email)
         etPassword = findViewById(R.id.et_password)
-        btnSignIn = findViewById(R.id.btn_sign_in)
-        tvGoRegister = findViewById(R.id.tv_go_register)
+        etConfirmPassword = findViewById(R.id.et_confirm_password)
+        btnRegister = findViewById(R.id.btn_register)
+        tvGoLogin = findViewById(R.id.tv_go_login)
 
         etEmail.doAfterTextChanged { tilEmail.error = null }
         etPassword.doAfterTextChanged { tilPassword.error = null }
+        etConfirmPassword.doAfterTextChanged { tilConfirmPassword.error = null }
 
-        btnSignIn.setOnClickListener {
-            loginUser()
+        btnRegister.setOnClickListener {
+            registerUser()
         }
 
-        tvGoRegister.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+        tvGoLogin.setOnClickListener {
+            finish()
         }
     }
 
-    private fun loginUser() {
+    private fun registerUser() {
         val email = etEmail.text.toString().trim()
         val password = etPassword.text.toString().trim()
+        val confirmPassword = etConfirmPassword.text.toString().trim()
 
         if (email.isEmpty()) {
             tilEmail.error = getString(R.string.empty_email)
@@ -64,8 +68,16 @@ class LoginActivity : AppCompatActivity() {
             tilPassword.error = getString(R.string.empty_password)
             return
         }
+        if (confirmPassword.isEmpty()) {
+            tilConfirmPassword.error = getString(R.string.empty_confirm_password)
+            return
+        }
+        if (password != confirmPassword) {
+            tilConfirmPassword.error = getString(R.string.password_mismatch)
+            return
+        }
 
-        FirebaseAuthManager.signIn(
+        FirebaseAuthManager.register(
             email = email,
             password = password,
             onSuccess = { openMainActivity(email) },
@@ -85,37 +97,3 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 }
-
-object FirebaseAuthManager {
-
-    private val firebaseAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
-
-    fun currentUserEmail(): String? = firebaseAuth.currentUser?.email
-
-    fun signIn(
-        email: String,
-        password: String,
-        onSuccess: () -> Unit,
-        onFailure: (String) -> Unit
-    ) {
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener { exception ->
-                onFailure(exception.localizedMessage ?: "Authentication failed")
-            }
-    }
-
-    fun register(
-        email: String,
-        password: String,
-        onSuccess: () -> Unit,
-        onFailure: (String) -> Unit
-    ) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener { exception ->
-                onFailure(exception.localizedMessage ?: "Authentication failed")
-            }
-    }
-}
-

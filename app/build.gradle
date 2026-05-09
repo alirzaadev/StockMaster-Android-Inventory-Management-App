@@ -2,6 +2,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.android.application'
     id 'com.google.devtools.ksp'
+    id 'com.google.gms.google-services'
 }
 
 
@@ -42,6 +43,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:33.1.2')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-auth'
     
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'

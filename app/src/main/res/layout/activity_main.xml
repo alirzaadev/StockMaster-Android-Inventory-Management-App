@@ -45,6 +45,16 @@
             android:contentDescription="@string/notifications"
             android:src="@android:drawable/ic_popup_reminder"
             app:tint="@color/outline" />
+
+        <ImageButton
+            android:id="@+id/btn_logout"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/logout_description"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="@color/outline" />
     </LinearLayout>
 
     <!-- Fragment Container -->

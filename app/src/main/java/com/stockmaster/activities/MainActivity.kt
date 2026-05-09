@@ -4,14 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.stockmaster.R
 import com.stockmaster.database.AppDatabase
 import com.stockmaster.fragments.AnalyticsFragment
@@ -32,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var fab: FloatingActionButton
     private lateinit var btnNotifications: ImageButton
+    private lateinit var btnLogout: ImageButton
     private var currentTabId: Int = R.id.nav_dashboard
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         bottomNav = findViewById(R.id.bottom_nav)
         fab = findViewById(R.id.fab_add)
         btnNotifications = findViewById(R.id.btn_notifications)
+        btnLogout = findViewById(R.id.btn_logout)
 
         // Set app bar title
         val tvAppTitle = findViewById<TextView>(R.id.tv_app_title)
@@ -100,6 +101,15 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AlertsActivity::class.java)
             intent.putExtra("USER_ROLE", userRole)
             startActivity(intent)
+        }
+
+        btnLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this, LoginActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            }
+            startActivity(intent)
+            finish()
         }
 
         // Load unread alert badge count
