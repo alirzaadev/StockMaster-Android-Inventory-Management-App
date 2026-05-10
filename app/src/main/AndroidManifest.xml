@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Required for posting notifications on Android 13+ -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StockMaster"
         tools:targetApi="34">
+
+        <!-- Set default FCM notification channel id so Firebase SDK can use it when showing notifications -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="stockmaster_alerts" />
 
         <activity
             android:name=".activities.SplashActivity"
@@ -50,6 +57,11 @@
             android:theme="@style/Theme.StockMaster.NoActionBar" />
 
         <activity
+            android:name=".activities.AnalyticsScreenActivity"
+            android:exported="false"
+            android:theme="@style/Theme.StockMaster.NoActionBar" />
+
+        <activity
             android:name=".activities.SaleDetailActivity"
             android:exported="false"
             android:theme="@style/Theme.StockMaster.NoActionBar" />
@@ -58,6 +70,15 @@
             android:name=".activities.AlertsActivity"
             android:exported="false"
             android:theme="@style/Theme.StockMaster.NoActionBar" />
+
+        <!-- Firebase Messaging service -->
+        <service
+            android:name=".services.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
     </application>
 

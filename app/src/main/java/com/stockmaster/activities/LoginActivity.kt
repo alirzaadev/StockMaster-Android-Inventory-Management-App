@@ -18,6 +18,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.stockmaster.R
+import com.stockmaster.repository.FirestoreSyncManager
 
 class LoginActivity : AppCompatActivity() {
 
@@ -127,6 +128,10 @@ class LoginActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         FirebaseAuth.getInstance().signInWithCredential(credential)
             .addOnSuccessListener {
+                FirestoreSyncManager.upsertCurrentUser(
+                    fallbackEmail = account.email,
+                    fallbackName = account.displayName
+                )
                 openMainActivity(account.email)
             }
             .addOnFailureListener {
@@ -158,7 +163,10 @@ object FirebaseAuthManager {
         onFailure: (String) -> Unit
     ) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
-            .addOnSuccessListener { onSuccess() }
+            .addOnSuccessListener {
+                FirestoreSyncManager.upsertCurrentUser(fallbackEmail = email)
+                onSuccess()
+            }
             .addOnFailureListener { exception ->
                 onFailure(exception.localizedMessage ?: "Authentication failed")
             }
@@ -171,7 +179,10 @@ object FirebaseAuthManager {
         onFailure: (String) -> Unit
     ) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnSuccessListener { onSuccess() }
+            .addOnSuccessListener {
+                FirestoreSyncManager.upsertCurrentUser(fallbackEmail = email)
+                onSuccess()
+            }
             .addOnFailureListener { exception ->
                 onFailure(exception.localizedMessage ?: "Authentication failed")
             }

@@ -1,10 +1,15 @@
 package com.stockmaster.activities
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -26,6 +31,10 @@ import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        private const val REQUEST_CODE_POST_NOTIFICATIONS = 1001
+    }
+
     // F1 — Read from Intent extras (NOT companion, NOT static)
     private val userName: String by lazy { intent.getStringExtra("USER_NAME") ?: "User" }
     private val userRole: String by lazy { intent.getStringExtra("USER_ROLE") ?: "STAFF" }
@@ -40,6 +49,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Request POST_NOTIFICATIONS at runtime for Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    REQUEST_CODE_POST_NOTIFICATIONS
+                )
+            }
+        }
         bottomNav = findViewById(R.id.bottom_nav)
         fab = findViewById(R.id.fab_add)
         btnNotifications = findViewById(R.id.btn_notifications)

@@ -9,14 +9,18 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.stockmaster.R
 import com.stockmaster.adapters.ProductAdapter
+import com.stockmaster.repository.FirestoreSyncManager
 import com.stockmaster.viewmodels.ProductViewModel
 
 class InventoryFragment : Fragment() {
@@ -35,6 +39,9 @@ class InventoryFragment : Fragment() {
 
     private var selectedCategory = "All"
     private var userRole: String = "STAFF"
+    private var firestoreRegistration: ListenerRegistration? = null
+    private var isRealtimeDataActive = false
+    private var hasRemoteProducts = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,26 +78,38 @@ class InventoryFragment : Fragment() {
 
         // Observe products
         viewModel.allProducts.observe(viewLifecycleOwner) { products ->
-            productAdapter.setData(products)
-            updateEmptyState()
+            if (!isRealtimeDataActive) {
+                productAdapter.setData(products)
+                updateSummaryCounts(products)
+                updateProductCount(products.size)
+                updateEmptyState()
+            }
         }
 
         // Product count
         viewModel.totalProductCount.observe(viewLifecycleOwner) { count ->
-            tvProductCount.text = "${count ?: 0} Products"
+            if (!isRealtimeDataActive) {
+                tvProductCount.text = "${count ?: 0} Products"
+            }
         }
 
         // Summary chip counts
         viewModel.inStockCount.observe(viewLifecycleOwner) { count ->
-            tvInStockCount.text = "${count ?: 0} In Stock"
+            if (!isRealtimeDataActive) {
+                tvInStockCount.text = "${count ?: 0} In Stock"
+            }
         }
 
         viewModel.lowStockCount.observe(viewLifecycleOwner) { count ->
-            tvLowStockCount.text = "${count ?: 0} Low Stock"
+            if (!isRealtimeDataActive) {
+                tvLowStockCount.text = "${count ?: 0} Low Stock"
+            }
         }
 
         viewModel.outOfStockCount.observe(viewLifecycleOwner) { count ->
-            tvOutOfStockCount.text = "${count ?: 0} Out of Stock"
+            if (!isRealtimeDataActive) {
+                tvOutOfStockCount.text = "${count ?: 0} Out of Stock"
+            }
         }
 
         // F5 — Search TextWatcher
@@ -115,6 +134,59 @@ class InventoryFragment : Fragment() {
             productAdapter.filter(etSearch.text.toString(), selectedCategory)
             updateEmptyState()
         }
+
+        startFirestoreRealtimeSync()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        firestoreRegistration?.remove()
+        firestoreRegistration = null
+    }
+
+    private fun startFirestoreRealtimeSync() {
+        val ownerId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        firestoreRegistration?.remove()
+        firestoreRegistration = FirestoreSyncManager.listenProductsByOwner(
+            ownerId = ownerId,
+            onProductsChanged = { products ->
+                if (products.isNotEmpty()) {
+                    hasRemoteProducts = true
+                }
+
+                if (products.isEmpty() && !hasRemoteProducts) {
+                    isRealtimeDataActive = false
+                    return@listenProductsByOwner
+                }
+
+                isRealtimeDataActive = true
+                productAdapter.setData(products)
+                productAdapter.filter(etSearch.text.toString(), selectedCategory)
+                updateSummaryCounts(products)
+                updateProductCount(products.size)
+                updateEmptyState()
+            },
+            onError = {
+                isRealtimeDataActive = false
+                if (context != null) {
+                    Toast.makeText(requireContext(), "Realtime sync unavailable", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
+
+    private fun updateProductCount(count: Int) {
+        tvProductCount.text = "$count Products"
+    }
+
+    private fun updateSummaryCounts(products: List<com.stockmaster.models.Product>) {
+        val inStock = products.count { it.stockQuantity > it.lowStockThreshold }
+        val lowStock = products.count { it.stockQuantity in 1..it.lowStockThreshold }
+        val outOfStock = products.count { it.stockQuantity == 0 }
+
+        tvInStockCount.text = "$inStock In Stock"
+        tvLowStockCount.text = "$lowStock Low Stock"
+        tvOutOfStockCount.text = "$outOfStock Out of Stock"
     }
 
     private fun updateEmptyState() {

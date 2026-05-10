@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.stockmaster.R
 import com.stockmaster.activities.AddEditProductActivity
 import com.stockmaster.activities.AlertsActivity
+import com.stockmaster.activities.AnalyticsScreenActivity
 import com.stockmaster.adapters.SaleAdapter
 import com.stockmaster.viewmodels.DashboardViewModel
 
@@ -119,9 +120,7 @@ class DashboardFragment : Fragment() {
         }
 
         btnPrintReports.setOnClickListener {
-            // Navigate to Analytics tab
-            val activity = requireActivity() as? com.stockmaster.activities.MainActivity
-            activity?.navigateToTab(R.id.nav_analytics)
+            startActivity(Intent(requireContext(), AnalyticsScreenActivity::class.java))
         }
     }
 
