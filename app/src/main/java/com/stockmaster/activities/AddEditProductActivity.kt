@@ -10,11 +10,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.stockmaster.R
 import com.stockmaster.models.Product
+import com.stockmaster.repository.FirestoreSyncManager
 import com.stockmaster.utils.ProfitCalculator
 import com.stockmaster.viewmodels.ProductViewModel
 
@@ -205,6 +207,7 @@ class AddEditProductActivity : AppCompatActivity() {
                 lowStockThreshold = threshold
             )
             productViewModel.update(updated) {
+                syncProductToFirestore(updated)
                 Toast.makeText(this, "Product updated successfully!", Toast.LENGTH_SHORT).show()
                 finish()
             }
@@ -219,9 +222,16 @@ class AddEditProductActivity : AppCompatActivity() {
                 lowStockThreshold = threshold
             )
             productViewModel.insert(newProduct) {
+                val localId = it.toInt()
+                syncProductToFirestore(newProduct.copy(id = localId))
                 Toast.makeText(this, "Product added successfully!", Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
+    }
+
+    private fun syncProductToFirestore(product: Product) {
+        val ownerId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        FirestoreSyncManager.upsertProduct(product = product, ownerId = ownerId)
     }
 }

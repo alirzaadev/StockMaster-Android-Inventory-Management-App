@@ -34,7 +34,7 @@
                 android:textColor="@color/on_surface"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/manrope_bold" />
+                />
 
             <!-- Product Name -->
             <com.google.android.material.textfield.TextInputLayout
@@ -58,7 +58,7 @@
                     android:id="@+id/et_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
+                    
                     android:textColor="@color/on_surface"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -85,7 +85,7 @@
                     android:id="@+id/act_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
+                    
                     android:inputType="none"
                     android:textColor="@color/on_surface"
                     android:textSize="14sp" />
@@ -113,7 +113,7 @@
                     android:id="@+id/et_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
+                    
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:lines="3"
@@ -143,7 +143,7 @@
                     android:id="@+id/et_purchase"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
+                    
                     android:inputType="numberDecimal"
                     android:textColor="@color/on_surface"
                     android:textSize="14sp" />
@@ -171,7 +171,7 @@
                     android:id="@+id/et_selling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
+                    
                     android:inputType="numberDecimal"
                     android:textColor="@color/on_surface"
                     android:textSize="14sp" />
@@ -199,7 +199,7 @@
                     android:id="@+id/et_stock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
+                    
                     android:inputType="number"
                     android:textColor="@color/on_surface"
                     android:textSize="14sp" />
@@ -227,7 +227,7 @@
                     android:id="@+id/et_threshold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter"
+                    
                     android:inputType="number"
                     android:textColor="@color/on_surface"
                     android:textSize="14sp" />
@@ -244,7 +244,7 @@
                 android:textColor="@color/outline"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/manrope_bold" />
+                />
 
             <!-- Save Button -->
             <com.google.android.material.button.MaterialButton
@@ -259,7 +259,7 @@
                 android:textColor="@color/on_primary"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/inter_medium"
+                
                 app:backgroundTint="@null"
                 app:cornerRadius="100dp" />
         </LinearLayout>

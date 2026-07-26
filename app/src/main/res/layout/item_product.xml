@@ -26,7 +26,6 @@
             android:textColor="@color/on_surface"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:fontFamily="@font/manrope_bold"
             app:layout_constraintEnd_toStartOf="@+id/tv_category_badge"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +38,6 @@
             android:text="Category"
             android:textColor="@color/on_surface_variant"
             android:textSize="11sp"
-            android:fontFamily="@font/inter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +50,6 @@
             android:text="Purchase: Rs.0"
             android:textColor="@color/outline"
             android:textSize="12sp"
-            android:fontFamily="@font/inter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
 
@@ -65,7 +62,6 @@
             android:text="Selling: Rs.0"
             android:textColor="@color/on_secondary_container"
             android:textSize="12sp"
-            android:fontFamily="@font/inter"
             app:layout_constraintStart_toEndOf="@+id/tv_purchase_price"
             app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
 
@@ -79,7 +75,6 @@
             android:text="0 units"
             android:textColor="@color/on_surface"
             android:textSize="13sp"
-            android:fontFamily="@font/inter_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_purchase_price" />
 
@@ -93,7 +88,6 @@
             android:textColor="@color/on_secondary_fixed"
             android:textSize="11sp"
             android:textStyle="bold"
-            android:fontFamily="@font/inter_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_selling_price" />
 

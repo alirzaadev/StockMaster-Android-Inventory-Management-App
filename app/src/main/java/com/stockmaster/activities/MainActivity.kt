@@ -1,17 +1,23 @@
 package com.stockmaster.activities
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.stockmaster.R
 import com.stockmaster.database.AppDatabase
 import com.stockmaster.fragments.AnalyticsFragment
@@ -25,6 +31,10 @@ import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        private const val REQUEST_CODE_POST_NOTIFICATIONS = 1001
+    }
+
     // F1 — Read from Intent extras (NOT companion, NOT static)
     private val userName: String by lazy { intent.getStringExtra("USER_NAME") ?: "User" }
     private val userRole: String by lazy { intent.getStringExtra("USER_ROLE") ?: "STAFF" }
@@ -32,15 +42,28 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var fab: FloatingActionButton
     private lateinit var btnNotifications: ImageButton
+    private lateinit var btnLogout: ImageButton
     private var currentTabId: Int = R.id.nav_dashboard
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Request POST_NOTIFICATIONS at runtime for Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    REQUEST_CODE_POST_NOTIFICATIONS
+                )
+            }
+        }
         bottomNav = findViewById(R.id.bottom_nav)
         fab = findViewById(R.id.fab_add)
         btnNotifications = findViewById(R.id.btn_notifications)
+        btnLogout = findViewById(R.id.btn_logout)
 
         // Set app bar title
         val tvAppTitle = findViewById<TextView>(R.id.tv_app_title)
@@ -100,6 +123,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AlertsActivity::class.java)
             intent.putExtra("USER_ROLE", userRole)
             startActivity(intent)
+        }
+
+        btnLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN).signOut()
+            val intent = Intent(this, LoginActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            }
+            startActivity(intent)
+            finish()
         }
 
         // Load unread alert badge count

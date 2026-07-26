@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root_login"
+    android:id="@+id/root_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
@@ -21,15 +21,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.33" />
 
     <TextView
-        android:id="@+id/tv_welcome"
+        android:id="@+id/tv_register_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="72dp"
-        android:text="@string/welcome_back"
+        android:text="@string/register"
         android:textColor="@color/on_primary"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -37,19 +37,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_sign_in_subtitle"
+        android:id="@+id/tv_register_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="6dp"
-        android:text="@string/sign_in_subtitle"
+        android:text="@string/register_subtitle"
         android:textColor="@color/on_primary_container"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_welcome" />
+        app:layout_constraintTop_toBottomOf="@id/tv_register_title" />
 
     <LinearLayout
-        android:id="@+id/card_login"
+        android:id="@+id/card_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -93,7 +93,7 @@
             style="@style/Widget.Material3.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             android:hint="@string/hint_password"
             app:boxBackgroundColor="@color/surface_container_highest"
             app:boxCornerRadiusBottomEnd="12dp"
@@ -114,12 +114,38 @@
                 android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_confirm_password"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:hint="@string/confirm_password"
+            app:boxBackgroundColor="@color/surface_container_highest"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:endIconMode="password_toggle"
+            app:hintTextColor="@color/outline"
+            app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
+            app:startIconTint="@color/outline">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/on_surface"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_sign_in"
+            android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:background="@drawable/bg_button_primary"
-            android:text="@string/sign_in"
+            android:text="@string/register"
             android:textAllCaps="false"
             android:textColor="@color/on_primary"
             android:textStyle="bold"
@@ -127,37 +153,13 @@
             app:cornerRadius="100dp" />
 
         <TextView
-            android:id="@+id/tv_continue_with"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="12dp"
-            android:text="@string/continue_with"
-            android:textColor="@color/outline"
-            android:textSize="12sp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_google_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:text="@string/continue_with_google"
-            android:textAllCaps="false"
-            android:textColor="@color/on_surface"
-            android:textStyle="bold"
-            app:backgroundTint="@android:color/transparent"
-            app:strokeColor="@color/secondary"
-            app:strokeWidth="1dp"
-            app:cornerRadius="100dp" />
-
-        <TextView
-            android:id="@+id/tv_go_register"
+            android:id="@+id/tv_go_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="18dp"
             android:padding="8dp"
-            android:text="@string/go_to_register"
+            android:text="@string/go_to_login"
             android:textColor="@color/secondary"
             android:textStyle="bold" />
 
